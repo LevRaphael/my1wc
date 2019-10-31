@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=\, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text" id="num1">
+    <input type="text" id="num2"> <br> <br>
+    <button onclick="operator('+')" id="add" >+</button> 
+    <button onclick="operator('-')" id="min" >-</button> 
+    <button onclick="operator('*')" id="mult" >*</button> 
+    <button onclick="operator('/')" id="div" >/</button> <br> <br>
+    <button onclick="calculat(operator)" id="equals" >=</button> 
+
+<script>
+    function calculat(operator){
+        if (operator == '+') {
+        alert((a*1) + (b*1))
+    }
+    }
+
+    function operator(operator){
+        let a = document.getElementById("num1").value
+        let b = document.getElementById("num2").value
+    if (operator == '+') {
+        // alert((a*1) + (b*1))
+        calculat('+')
+    }
+    if(operator == '-'){
+        alert( a - b)
+    }
+    if(operator == '*'){
+        alert(a * b)
+    }
+    if(operator == '/'){
+        alert( a / b)
+    }
+
+    }
+</script>
+
+
+    
+</body>
+</html>

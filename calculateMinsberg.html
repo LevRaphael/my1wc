@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Calculator</title>
+</head>
+
+<body>
+    <div>
+        <div>
+            <input type="text" id="display">
+        </div>
+        <div>
+            <span>
+                <input type="button" value="1" onclick="click1(1)">
+            </span>
+            <span>
+                <input type="button" value="2" onclick="click1(2)">
+            </span>
+            <span>
+                <input type="button" value="3" onclick="click1(3)">
+            </span>
+            <span>
+                <input type="button" value="+" onclick="click1('+')">
+            </span>
+        </div>
+        <div>
+            <span>
+                <input type="button" value="4" onclick="click1(4)">
+            </span>
+            <span>
+                <input type="button" value="5" onclick="click1(5)">
+            </span>
+            <span>
+                <input type="button" value="6" onclick="click1(6)">
+            </span>
+            <span>
+                <input type="button" value="-" onclick="click1('-')">
+            </span>
+        </div>
+        <div>
+            <span>
+                <input type="button" value="7" onclick="click1(7)">
+            </span>
+            <span>
+                <input type="button" value="8" onclick="click1(8)">
+            </span>
+            <span>
+                <input type="button" value="9" onclick="click1(9)">
+            </span>
+            <span>
+                <input type="button" value="*" onclick="click1('*')">
+            </span>
+        </div>
+        <div>
+            <span>
+                <input type="button" value="C" onclick="click1('clear')">
+            </span>
+            <span>
+                <input type="button" value="0" onclick="click1(0)">
+            </span>
+            <span>
+                <input type="button" value="=" onclick="equel()">
+            </span>
+            <span>
+                <input type="button" value="/" onclick="click1('/')">
+            </span>
+        </div>
+        <div>
+            History:
+            <br>
+            <textarea name="" id="history" cols="30" rows="10"></textarea>
+        </div>
+    </div>
+    <script>
+        let dis = [], d = true
+        function click1(par) {
+            if (!d) {
+                document.getElementById('display').value = ''
+                d = true
+            }
+            if (par == 'clear') {
+                document.getElementById('display').value = ''
+                dis = []
+            } else {
+                dis.push(par)
+                document.getElementById('display').value += par
+            }
+        }
+        function equel() {
+            //debugger
+            d = false
+            let n = '', tot = 0, oper = 'e', h
+            dis = multi(dis)
+            for (let i = 0; i < dis.length + 1; i++) {
+                let c
+                if (i == dis.length) {
+                    c = 'e'
+                } else {
+                    c = dis[i]
+                    h += c
+                }
+                if (typeof c == 'number') {
+                    n += c
+                } else {
+                    switch (oper) {
+                        case "e":
+                            tot += parseFloat(n)
+                            break;
+                        case "+":
+                            tot += parseFloat(n)
+                            break;
+                        case "-":
+                            tot -= parseFloat(n)
+                            break;
+                        case "*":
+                            tot *= parseFloat(n)
+                            break;
+                        case "/":
+                            tot /= parseFloat(n)
+                            break;
+                        default:
+                            document.getElementById('display').value = 'EROR'
+                            break;
+                    }
+                    n = ''
+                    oper = c
+                }
+            }
+            h = document.getElementById('display').value += '=' + tot
+            document.getElementById("history").value += h + "; "
+            tot = 0
+            dis = []
+        }
+        function multi(arr1) {
+            console.log(arr1)
+            let x = '', arr = []
+            for (let i = 0; i < arr1.length; i++) {
+                if (typeof arr1[i] == 'number') {
+                    x += arr1[i]
+                }
+                if (!(typeof arr1[i] == 'number')) {
+                    arr.push(x)
+                    arr.push(arr1[i])
+                    x = ''
+                }
+                if (i == arr1.length - 1) {
+                    arr.push(x)
+                }
+            }
+            console.log(arr)
+            let newArr = []
+            for (let i = 0; i < arr.length; i++) {
+                switch (arr[i]) {
+                    case "*":
+                        arr[i + 1] = (arr[i - 1] * arr[i + 1])
+                        arr[i - 1] = 'x'
+                        arr[i] = 'x'
+                        break;
+                    case "/":
+                        arr[i + 1] = (arr[i - 1] / arr[i + 1])
+                        arr[i - 1] = 'x'
+                        arr[i] = 'x'
+                        break;
+                    default:
+                        break;
+                }
+            }
+            console.log(arr)
+            for (let i = 0; i < arr.length; i++) {
+                if (arr[i] != 'x') {
+                    switch (arr[i]) {
+                        case '+':
+                            newArr.push(arr[i])
+                            break;
+                        case '*':
+                            newArr.push(arr[i])
+                            break;
+                        case '-':
+                            newArr.push(arr[i])
+                            break;
+                        case '/':
+                            newArr.push(arr[i])
+                            break;
+                        default:
+                            if ((arr[i] * 1) > 0) {
+                                newArr.push(arr[i] * 1)
+                            }
+                            break;
+                    }
+                }
+            }
+            console.log(arr)
+            console.log(newArr)
+            return newArr
+        }
+    </script>
+</body>
+
+</html>

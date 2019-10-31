@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <input id="input" type="text" size="10">
+    </div> <br>
+
+    <div> 
+        <button id="num1" onclick="print(1)">1</button>
+        <button id="num2" onclick="print(2)">2</button>
+        <button id="num3" onclick="print(3)">3</button>
+        <button id="operatorPlus" onclick="print('+')">+</button>
+    </div>
+
+    <div> 
+        <button id="num4" onclick="print(4)">4</button>
+        <button id="num5" onclick="print(5)">5</button>
+        <button id="num6" onclick="print(6)">6</button>
+        <button id="operatorMin" onclick="print('-')">-</button>
+    </div>
+
+    <div> 
+        <button id="num7" onclick="print(7)">7</button>
+        <button id="num8" onclick="print(8)">8</button>
+        <button id="num9" onclick="print(9)">9</button>
+        <button id="operatorMult" onclick="print('*')">*</button>
+    </div>
+
+    <div> 
+        <button  onclick="del()">c</button>
+        <button id="operatorEq" onclick="calct()">=</button>
+        <button id="num0" onclick="print(0)">0</button>
+        <button id="operatorDiv" onclick="print('/')">/</button>
+    </div>
+
+    <div id="result"></div>
+    
+<script>
+    function print(n){
+        console.log('number inter' , n)
+        nums.push(n)
+        document.getElementById("input").value += n
+    }
+
+    function del(){
+        document.getElementById("input").value = ' ' 
+        nums = []
+
+    }
+</script>
+
+<script>
+    total = 0
+    let nums = []
+    function calct(){
+        console.log('array' , nums)
+        print('=')
+
+        let t = '', operator = '+' , numOfcalculat = 0
+
+        for (let i = 0; i < nums.length; i++) {
+                let n = nums[i]
+            if(typeof n == "number"){
+                t += n 
+            }
+            else{
+                numOfcalculat = parseInt(t);                               
+                t = ''
+                calcule(operator, numOfcalculat);
+                operator = n;
+                }               
+            }
+        print(total)
+        total = 0
+        console.log('calcul total', total)
+        }
+
+    function calcule(operator , numOfcalculat){
+        console.log('operator  ', operator + ' number of calcul ' + numOfcalculat)
+        if(isNaN(numOfcalculat)== true){
+                    console.error('total is NaN, user clicked')
+                }
+        switch(operator){
+            case '+' :
+                total += numOfcalculat
+                break;
+            case '-':
+                total -= numOfcalculat
+                break;
+            case '*':
+                total *= numOfcalculat
+                break;
+            case '/':
+                total /= numOfcalculat
+                default:
+                    break;
+        }
+    }
+</script>
+</body>
+</html>

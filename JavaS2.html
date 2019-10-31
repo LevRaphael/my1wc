@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        
+    </style>
+</head>
+<body>
+    <div>
+        <input id="input" type="text" size="10">
+    </div> <br>
+        
+    <div> 
+        <button id="num1" onclick="numEnter('1')">1</button>
+        <button id="num2" onclick="numEnter('2')">2</button>
+        <button id="num3" onclick="numEnter('3')">3</button>
+        <button id="operatorPlus" onclick="operatEnter('+')">+</button>
+    </div>
+        
+    <div> 
+        <button id="num4" onclick="numEnter('4')">4</button>
+        <button id="num5" onclick="numEnter('5')">5</button>
+        <button id="num6" onclick="numEnter('6')">6</button>
+        <button id="operatorMin" onclick="operatEnter('-')">-</button>
+    </div>
+        
+    <div> 
+        <button id="num7" onclick="numEnter('7')">7</button>
+        <button id="num8" onclick="numEnter('8')">8</button>
+        <button id="num9" onclick="numEnter('9')">9</button>
+        <button id="operatorMult" onclick="operatEnter('*')">*</button>
+    </div>
+        
+    <div> 
+        <button  onclick="del()">c</button>
+        <button id="operatorEq" onclick="calct()">=</button>
+        <button id="num0" onclick="numEnter('1')">0</button>
+        <button id="operatorDiv" onclick="operatEnter('/')">/</button>
+    </div>
+        
+    <div id="result"></div>
+
+    <script>
+
+        function del() {
+            document.getElementById("input").value = ' ' 
+            numArr = []
+        }
+
+        let numArr = [];
+        let num_in_string ='';
+        let num_in_int = 0; 
+        let i = 0;
+
+        function numEnter(params) {
+            document.getElementById("input").value += params 
+            num_in_string += params
+            console.log('Number enter en string', num_in_string);
+            
+       }
+
+       function operatEnter(operat) {
+
+           document.getElementById("input").value += operat   
+           num_in_int = parseInt(num_in_string)
+           console.log('Number enter en int', num_in_int);
+           num_in_string = '';
+           numArr[i] = num_in_int;
+           console.log('number in array in index i', i);
+           i += 1
+           numArr[i] = operat; 
+           console.log('operat in array in index i', i);
+                   
+       }
+
+       function calct() {
+            i += 1
+           num_in_int = parseInt(num_in_string)
+           console.log('Number enter en int ', num_in_int);
+           num_in_string = '';
+           numArr[i] = num_in_int ;
+           console.log('number in array in index i', i);
+           
+           
+           num_of_calculat = 0
+           console.log('num of calculat' , num_of_calculat);
+           
+           let mult = numArr.indexOf('*')
+           let div = numArr.indexOf('/')
+           for( let i = 1 ; numArr.length ; i++){
+               if (mult > -1 &&  div > -1 ) {
+                   if (div > mult ) {
+                       num_of_calculat = [mult - 1] * [mult+1];
+                       console.log('num of calculat' , num_of_calculat);
+                       alert(num_of_calculat)
+                   } 
+                   
+               }
+
+
+           }
+           
+       }
+
+
+    
+    </script>
+</body>
+</html>
